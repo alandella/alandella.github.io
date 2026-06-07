@@ -12,6 +12,10 @@ cv:
       username: example
 
   sections:
+    Summary:
+      - A German-born theoretical physicist, widely ranked among
+        the greatest and most influential scientists of all time.
+
     Education:
       - institution: University of Zurich
         location: Zurich, Switzerland
