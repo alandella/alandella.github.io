@@ -29,9 +29,9 @@ latest_posts:
 
 <div style="text-align: right; font-style: italic; margin: 1.5em 0;">
 
-> "Nobody, I suppose, could devote many years to the study of chemical kinetics without being deeply conscious of the fascination of time and change: this is something that goes outside science into poetry."
->
-> — C.N. Hinshelwood, Nobel Lecture, 1956
+"Nobody, I suppose, could devote many years to the study of chemical kinetics without being deeply conscious of the fascination of time and change: this is something that goes outside science into poetry."
+<br>
+— C.N. Hinshelwood, Nobel Lecture, 1956
 
 </div>
 
