@@ -27,8 +27,9 @@ latest_posts:
   limit: 0 # leave blank to include all the blog posts
 ---
 
-<blockquote>
-  <p><i>Questo è un testo citato da una fonte esterna.</i></p>
+<blockquote style="font-size: 24px;">
+  <i>Questo è un testo citato da una fonte esterna.</i>
+  <br>
   — C.N. Hinshelwood, Nobel Lecture, 1956
 </blockquote>
 
