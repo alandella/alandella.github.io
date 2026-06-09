@@ -9,9 +9,9 @@ profile:
   image: prof_pic.jpg
   image_circular: true # crops the image to make it circular
   more_info: >
-    <p>Office Number</p>
-    <p>Address Street</p>
-    <p>20124 Milano, Italy</p>
+    Office Number<br>
+    Address Street<br>
+    20124 Milano, Italy
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -27,7 +27,7 @@ latest_posts:
   limit: 0 # leave blank to include all the blog posts
 ---
 
-<blockquote style="font-size: 24px;">
+<blockquote style="font-size: 0.85em;">
   <i>Questo è un testo citato da una fonte esterna.</i>
   <br>
   — C.N. Hinshelwood, Nobel Lecture, 1956
