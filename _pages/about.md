@@ -27,7 +27,7 @@ latest_posts:
   limit: 0 # leave blank to include all the blog posts
 ---
 
-<blockquote style="font-size: 0.88em; max-width: 80%; margin: 0; padding: 0;">
+<blockquote style="font-size: 0.88em; max-width: 80%; margin: 0.5em 0.5em 0.5em 2.5em;">
   <p style="margin-bottom: 0.8em;">
   The chymists are a strange class of mortals impelled by an almost insane impulse to seek their pleasure among smoke and vapor, soot and flame, poisons and poverty; yet among all these evils I seem to live so sweetly, that I may die if I would change places with the Persian king.
   </p>
