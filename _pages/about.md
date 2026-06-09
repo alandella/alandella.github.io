@@ -27,13 +27,12 @@ latest_posts:
   limit: 0 # leave blank to include all the blog posts
 ---
 
-<blockquote style="font-size: 0.88em; max-width: 80%;">
+<blockquote style="font-size: 0.88em; max-width: 80%; margin: 0; padding: 0;">
   <p style="margin-bottom: 0.8em;">
   The chymists are a strange class of mortals impelled by an almost insane impulse to seek their pleasure among smoke and vapor, soot and flame, poisons and poverty; yet among all these evils I seem to live so sweetly, that I may die if I would change places with the Persian king.
   </p>
   — Johann Joachim Becher (1635-1682), <i>Acta Laboratorii Chymici Monacensis</i>, 1669
 </blockquote>
-
 
 Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
