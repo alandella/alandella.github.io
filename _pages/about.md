@@ -7,7 +7,7 @@ subtitle: Double MSc in Chemical & Sustainable Process Engineering, Politecnico 
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: true # crops the image to make it circular
+  image_circular: false # crops the image to make it circular
   more_info: >
     Office Number<br>
     Address Street<br>
@@ -27,7 +27,7 @@ latest_posts:
   limit: 0 # leave blank to include all the blog posts
 ---
 
-<blockquote style="font-size: 0.85em;">
+<blockquote style="font-size: 0.9em;">
   <i>Questo è un testo citato da una fonte esterna.</i>
   <br>
   — C.N. Hinshelwood, Nobel Lecture, 1956
