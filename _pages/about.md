@@ -27,7 +27,7 @@ latest_posts:
   limit: 0 # leave blank to include all the blog posts
 ---
 
-<blockquote style="font-size: 0.9em;">
+<blockquote style="font-size: 0.88em;">
   The chymists are a strange class of mortals impelled by an almost insane impulse to seek their pleasure among smoke and vapor, soot and flame, poisons and poverty; yet among all these evils I seem to live so sweetly, that I may die if I would change places with the Persian king.
   <br>
   — Johann Joachim Becher (1635-1682), <i>Acta Laboratorii Chymici Monacensis</i>, 1669
