@@ -82,7 +82,7 @@ Then visit <http://localhost:8000>.
 
 | File | Description |
 |---|---|
-| `index.html` | About page, including bio, socials, and the selected projects, publications and posts |
+| `index.html` | About page with bio, socials, selected projects, publications and posts |
 | `blog.html` | Blog archive, grouped by year, with a search box |
 | `projects.html` | Projects archive, as a card grid with a search box |
 | `publications.html` | Publications list, with abstract / BibTeX / DOI controls |
