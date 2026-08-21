@@ -1,0 +1,106 @@
+# =============================================================
+#  posts.yml — every blog post on the site lives here.
+#  Edit this file and the about page, the archive and the post
+#  page all update. Newest posts go at the top.
+#
+#  Fields
+#    slug        url id, must be unique  ->  post.html#slug
+#    title       post title
+#    date        YYYY-MM-DD (shown as "15 mar 2026")
+#    selected    true = also appears on the about page (newest 2)
+#    draft       true = hidden everywhere, kept here
+#    tags        [one, two]  — clickable filters on the archive
+#    summary     one line, used on cards and under the title
+#    image       hero image path, e.g. assets/hero.jpg
+#                leave empty for a dashed placeholder
+#    link        external link, shown as a badge
+#    doi         DOI, shown as a badge
+#    body        the post, markdown, after "body: |"
+#                indent every body line by 4 spaces
+#
+#  Body markdown: ## and ### headings (they build the contents
+#  list), **bold**, *italic*, `code`, [links](url), lists,
+#  > quotes, ```code fences```, | tables |, ![caption](path)
+#  images, footnotes[^1] with [^1]: definitions at the end,
+#  and $inline math$ or $$display math$$.
+# =============================================================
+
+- slug: sample-blog1
+  title: sample blog1
+  date: 2026-03-15
+  selected: true
+  draft: false
+  tags: [category]
+  summary: One-sentence standfirst summarising the post.
+  image:
+  link:
+  doi:
+  body: |
+    post body
+
+    ## A subheading
+
+    Second paragraph. Keep paragraphs short; al-folio posts read best at this measure.
+
+    ![Caption for the image.]()
+
+    > A pull quote, if the post needs one.
+
+    Closing paragraph.
+
+- slug: sample-blog2
+  title: sample blog2
+  date: 2026-02-10
+  selected: true
+  draft: false
+  tags: [category]
+  summary: One-sentence standfirst summarising the post.
+  image:
+  link:
+  doi:
+  body: |
+    post body
+
+    ## A subheading
+
+    Second paragraph.
+
+    Closing paragraph.
+
+- slug: sample-blog3
+  title: sample blog3
+  date: 2025-11-04
+  selected: false
+  draft: false
+  tags: [category]
+  summary: One-sentence standfirst summarising the post.
+  image:
+  link:
+  doi:
+  body: |
+    post body
+
+    ## A subheading
+
+    Second paragraph.
+
+    Closing paragraph.
+
+- slug: sample-blog4
+  title: sample blog4
+  date: 2025-06-18
+  selected: false
+  draft: false
+  tags: [category]
+  summary: One-sentence standfirst summarising the post.
+  image:
+  link:
+  doi:
+  body: |
+    post body
+
+    ## A subheading
+
+    Second paragraph.
+
+    Closing paragraph.

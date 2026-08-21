@@ -1,0 +1,20 @@
+# Editor settings — local preference, not part of the site.
+# (These turn off the CSS validator, which cannot parse the {{ }}
+# placeholders in style attributes and only reports false positives.)
+.vscode/
+
+# Backup copies of the site. These are full duplicates; publishing one
+# would put a second, stale copy of every page on the live domain.
+dist.backup-*/
+*.backup/
+*.bak
+*.orig
+
+# Local preview servers and scratch files.
+__*.html
+*.log
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini

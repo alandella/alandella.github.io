@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="./support.js"></script>
+	</head>
+	<body>
+		<x-dc>
+			<helmet>
+				<title>Andrea Giuseppe Landella</title>
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+					crossorigin="anonymous" referrerpolicy="no-referrer">
+				<link rel="stylesheet"
+					href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+					crossorigin="anonymous" referrerpolicy="no-referrer">
+				<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+				<script src="./site-theme.js"></script>
+				<script src="./site-data.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+					crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+				<style>
+					html { scroll-behavior: smooth; }
+					body { margin: 0; background: #e8e9ee; color: #161A26; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; }
+					a { color: #2E5BD8; text-decoration: none; }
+					a:hover { text-decoration: underline; }
+				</style>
+			</helmet>
+
+			<div
+				style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; line-height: 1.5; letter-spacing: -0.005em; min-height: 100vh; display: flex; flex-direction: column; transition: background-color .2s ease, color .2s ease; background: {{ t.bg }}; color: {{ t.text }}">
+
+				<dc-import name="SiteNav" t="{{ t }}" base="index.html" active="blog"
+					theme-icon="{{ themeIcon }}" theme-title="{{ themeTitle }}"
+					on-cycle="{{ cycleTheme }}" style="position: sticky; top: 0; z-index: 20"
+					hint-size="100%,66px"></dc-import>
+
+				<main style="flex: 1 0 auto; align-self: center; box-sizing: border-box; width: 100%; max-width: calc(750px + 48px); padding: 56px 24px 0">
+					<a href="blog.html"
+						style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; color: {{ t.muted }}">←
+						all posts</a>
+
+					<sc-if value="{{ missing }}" hint-placeholder-val="{{ false }}">
+						<p
+							style="margin: 40px 0 64px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; color: {{ t.muted }}">{{
+							missingNote }}</p>
+					</sc-if>
+
+					<header
+						style="margin: 20px 0 32px; padding-bottom: 24px; border-bottom: 1px solid {{ t.divider }}">
+						<h1
+							style="margin: 0; font-size: 38px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.15">{{
+							title }}</h1>
+						<p
+							style="margin: 14px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; color: {{ t.muted }}">{{
+							meta }}</p>
+						<p style="margin: 16px 0 0; font-size: 18px; color: {{ t.muted }}">{{
+							summary }}</p>
+						<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px">
+							<sc-for list="{{ tags }}" as="tag" hint-placeholder-count="2">
+								<a href="{{ tag.href }}"
+									style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.03em; padding: 3px 9px; border-radius: 999px; color: {{ t.muted }}; border: 1px solid {{ t.divider }}"
+									style-hover="border-color: {{ t.accent }}; color: {{ t.accent }}; text-decoration: none">{{
+									tag.label }}</a>
+							</sc-for>
+							<sc-for list="{{ badges }}" as="b" hint-placeholder-count="0">
+								<a href="{{ b.href }}"
+									style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.04em; padding: 4px 11px; border-radius: 4px; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}; color: {{ t.text }}"
+									style-hover="border-color: {{ t.accent }}; color: {{ t.accent }}; text-decoration: none">{{
+									b.label }}</a>
+							</sc-for>
+						</div>
+					</header>
+
+					{{ heroNode }}
+					<sc-if value="{{ noHero }}" hint-placeholder-val="{{ true }}">
+						<div
+							style="margin: 0 0 36px; height: 240px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; color: {{ t.muted }}; background: {{ t.codeBg }}; border: 1px dashed {{ t.dash }}">hero
+							image — set "image:" in posts.yml</div>
+					</sc-if>
+
+					<sc-if value="{{ hasToc }}" hint-placeholder-val="{{ true }}">
+						<nav
+							style="margin: 0 0 40px; padding: 18px 20px; border-radius: 8px; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}">
+							<p
+								style="margin: 0 0 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ t.muted }}">contents</p>
+							<div style="display: flex; flex-direction: column; gap: 6px">
+								<sc-for list="{{ toc }}" as="item" hint-placeholder-count="3">
+									<a href="#{{ item.id }}"
+										style="font-size: 14.5px; color: {{ t.muted }}"
+										style-hover="color: {{ t.accent }}; text-decoration: none">{{
+										item.label }}</a>
+								</sc-for>
+							</div>
+						</nav>
+					</sc-if>
+
+					<article style="font-size: 17px; line-height: 1.7">{{ body }}</article>
+
+					<sc-if value="{{ hasNotes }}" hint-placeholder-val="{{ false }}">
+						<div
+							style="margin: 40px 0 0; padding-top: 20px; border-top: 1px solid {{ t.divider }}">
+							<p
+								style="margin: 0 0 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: {{ t.muted }}">notes</p>
+							{{ footnotes }}
+						</div>
+					</sc-if>
+
+					<div
+						style="margin: 48px 0 64px; padding-top: 24px; border-top: 1px solid {{ t.divider }}; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13.5px">
+						<sc-if value="{{ hasOlder }}" hint-placeholder-val="{{ true }}">
+							<a href="{{ olderHref }}" style="color: {{ t.muted }}; max-width: 260px"
+								style-hover="color: {{ t.accent }}; text-decoration: none">← {{
+								olderTitle }}</a>
+						</sc-if>
+						<button type="button" onClick="{{ toTop }}"
+							style="cursor: pointer; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.04em; padding: 5px 12px; border-radius: 4px; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}; color: {{ t.muted }}"
+							style-hover="border-color: {{ t.accent }}; color: {{ t.accent }}">↑
+							TOP</button>
+						<sc-if value="{{ hasNewer }}" hint-placeholder-val="{{ true }}">
+							<a href="{{ newerHref }}"
+								style="color: {{ t.muted }}; max-width: 260px; text-align: right"
+								style-hover="color: {{ t.accent }}; text-decoration: none">{{ newerTitle
+								}} →</a>
+						</sc-if>
+					</div>
+				</main>
+
+				<dc-import name="SiteFooter" t="{{ t }}" hint-size="100%,80px"></dc-import>
+			</div>
+
+		</x-dc>
+		<script type="text/x-dc" data-dc-script
+			data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1100, &quot;height&quot;: 900}}">
+			const T = window.SiteTheme;
+
+			class Component extends DCLogic {
+				state = { setting: "system", systemDark: false, posts: null, err: "", slug: "", katexReady: false };
+
+				componentDidMount() {
+					this.setState(Object.assign(T.start(this), { slug: this.hashSlug() }));
+
+					this.onHash = () => {
+						const want = this.hashSlug();
+						const posts = this.state.posts;
+						if (!want) return;
+						if (!posts || posts.some(p => p.slug === want)) {
+							this.setState({ slug: want });
+							window.scrollTo(0, 0);
+						}
+					};
+					window.addEventListener("hashchange", this.onHash);
+
+					this.grab();
+					this.waitForKatex(0);
+				}
+
+				componentWillUnmount() {
+					T.stop(this);
+					window.removeEventListener("hashchange", this.onHash);
+					clearTimeout(this.ktmr);
+				}
+
+				hashSlug() {
+					const q = String(location.search || "").match(/[?&]post=([^&]+)/);
+					const h = String(location.hash || "").replace(/^#/, "");
+					try { return decodeURIComponent(h || (q ? q[1] : "")); } catch (e) { return h; }
+				}
+
+				grab() {
+					const S = window.SiteData;
+					S.ready()
+					.then(() => S.load("posts.yml"))
+					.then(d => this.setState({ posts: S.validate("posts.yml", d, ["title"], true) }))
+					.catch(e => this.setState({ err: String(e && e.message || e) }));
+				}
+
+				waitForKatex(n) {
+					if (window.katex) { this.setState({ katexReady: true }); return; }
+					if (n > 60) return;
+					this.ktmr = setTimeout(() => this.waitForKatex(n + 1), 100);
+				}
+
+				componentDidUpdate() { T.sync(this.state, this.pageTitle); }
+
+				renderVals() {
+					const S = window.SiteData;
+					const t = T.PALETTES[T.resolve(this.state)];
+
+					const base = Object.assign({
+						year: new Date().getFullYear(),
+						toTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
+						title: "", meta: "", summary: "", tags: [], badges: [],
+						heroNode: null, noHero: false,
+						hasToc: false, toc: [], body: null, hasNotes: false, footnotes: null,
+						hasOlder: false, olderHref: "", olderTitle: "",
+						hasNewer: false, newerHref: "", newerTitle: "",
+						missing: false, missingNote: ""
+					}, T.vals(this));
+
+					const all = this.state.posts;
+					if (this.state.err) {
+						return Object.assign(base, { missing: true, missingNote: "Could not read posts.yml — " + this.state.err, title: "post" });
+					}
+					if (!all) return Object.assign(base, { title: "loading…" });
+
+					const live = all.filter(p => p && !p.draft && p.slug);
+					if (!live.length) {
+						return Object.assign(base, { missing: true, missingNote: "No posts in posts.yml yet.", title: "no posts" });
+					}
+
+					let idx = live.findIndex(p => p.slug === this.state.slug);
+					const unknown = this.state.slug && idx < 0;
+					if (idx < 0) idx = 0;
+					const post = live[idx];
+					const rendered = S.md(post.body, t);
+					this.pageTitle = post.title;
+
+					const tags = (Array.isArray(post.tags) ? post.tags : [post.tags]).filter(Boolean).map(x => ({
+						label: String(x),
+						href: "blog.html#tag=" + encodeURIComponent(String(x))
+					}));
+
+					const badges = [];
+					if (post.link) badges.push({ label: "LINK", href: String(post.link) });
+					if (post.doi) badges.push({ label: "DOI", href: /^https?:/.test(String(post.doi)) ? String(post.doi) : "https://doi.org/" + post.doi });
+
+					const older = live[idx + 1], newer = live[idx - 1];
+
+					return Object.assign(base, {
+						title: post.title || post.slug,
+						meta: [S.fmtDate(post.date), S.readTime(post.body) + " min read"].filter(Boolean).join(" · "),
+						summary: post.summary || "",
+						tags: tags,
+						badges: badges,
+						heroNode: post.image
+							? React.createElement("figure", { style: { margin: "0 0 36px" } },
+								React.createElement("img", { src: post.image, alt: post.title || "", style: { display: "block", width: "100%", borderRadius: "8px" } }))
+							: null,
+						noHero: !post.image,
+						hasToc: rendered.headings.length > 1,
+						toc: rendered.headings.map(x => ({ id: x.id, label: x.label })),
+						body: rendered.nodes,
+						hasNotes: !!rendered.footnotes,
+						footnotes: rendered.footnotes,
+						hasOlder: !!older,
+						olderHref: older ? "#" + older.slug : "",
+						olderTitle: older ? older.title : "",
+						hasNewer: !!newer,
+						newerHref: newer ? "#" + newer.slug : "",
+						newerTitle: newer ? newer.title : "",
+						missing: !!unknown,
+						missingNote: unknown ? 'No post with slug "' + this.state.slug + '" — showing the newest one.' : ""
+					});
+				}
+			}
+
+		</script>
+	</body>
+</html>
