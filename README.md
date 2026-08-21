@@ -182,9 +182,9 @@ Every line under `body: |` must be indented by four spaces. Dates are `YYYY-MM-D
 
 `publications.yml` carries the full record: authors, journal, volume, pages, DOI, abstract, and BibTeX. Three details are worth knowing:
 
-1. **Automatic surname bolding**: match comes from `owner.surname` in `site.yml`
+1. **Automatic surname bolding**: matching comes from `owner.surname` in `site.yml`
 2. **Customizable journal coloring**: `journal_color` sets the small chip beside the entry
-3. **Manual BibTeX entries**: The `BIB` button appears once text is pasted in `bibtex: |` field
+3. **Manual BibTeX entries**: `BIB` button appears once text is pasted in `bibtex: |` field
 
 The `ABS` and `BIB` buttons expand in place, and the `DOI` button copies the resolved DOI link to the clipboard while the title itself opens it.
 
