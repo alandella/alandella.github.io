@@ -1,4 +1,4 @@
-# alandella.github.io - Personal Academic Website
+# Personal Website
 
 ![HTML](https://img.shields.io/badge/HTML-static%20site-blue)
 ![Build](https://img.shields.io/badge/build-none-informational)
@@ -6,9 +6,7 @@
 ![Platform](https://img.shields.io/badge/platform-any%20modern%20browser-lightgrey)
 ![Hosting](https://img.shields.io/badge/hosting-GitHub%20Pages-important)
 
-A **static personal website** — about page, blog, projects and publications — where every piece of copy lives in four YAML files at the root of this folder. There is no build step, no site generator, and no database: upload the folder to any static host and it runs.
-
-Live at <https://alandella.github.io/>
+A **static personal website** with a skeleton layout: about page, blog, projects and publications. Every piece lives in four YAML files at the root of this folder. There is no build step, no site generator, and no database, the folder can be uploaded to any static host to run.
 
 ---
 
@@ -20,23 +18,23 @@ Live at <https://alandella.github.io/>
 
 ## How it works
 
-Each page is a plain HTML file wrapping an `<x-dc>` block, with a small `class Component extends DCLogic` script at the bottom. `support.js` — the DC runtime — compiles that markup into React in the browser at load time, resolving `{{ … }}` placeholders, `<sc-for>` loops, and `<dc-import>` component tags. Nothing is precompiled and there is no build output to keep in sync.
+Each page is a plain HTML file wrapping an `<x-dc>` block, with a small `class Component extends DCLogic` script at the bottom. The DC runtime `support.js` compiles that markup into React in the browser at load time, resolving `{{ … }}` placeholders, `<sc-for>` loops, and `<dc-import>` component tags. Nothing is precompiled and there is no build output to keep in sync.
 
-On load, every page calls `SiteData.ready()`, which fetches `site.yml`, hands its `theme:` block to `SiteTheme`, and only then reads the content file that page needs — `posts.yml`, `projects.yml`, or `publications.yml`. Entries are validated as they arrive: missing required fields and duplicate slugs are reported to the browser console rather than failing silently.
+On load, every page calls `SiteData.ready()`, which fetches `site.yml`, hands its `theme:` block to `SiteTheme`, and only then reads the content file that page needs: `posts.yml`, `projects.yml`, or `publications.yml`. Entries are validated as they arrive, as missing required fields and duplicate slugs are reported to the browser console instead of failing silently.
 
-Colours come from one place. `site-theme.js` holds the palette and the light/dark/system engine; no page defines a colour of its own. The theme button in the nav cycles **system → light → dark** and remembers the choice in `localStorage`.
+Colours come from the single place `site-theme.js`, which holds the palette and the light/dark/system engine. The theme button in the nav cycles **system → light → dark** and remembers the choice in `localStorage`.
 
 > [!WARNING]
-> **The pages fetch their YAML over HTTP.** Opening `index.html` straight from disk with a `file://` URL leaves every page empty, because those `fetch()` calls are blocked. Serve the folder over HTTP instead — see [Local preview](#local-preview).
+> **The pages fetch their YAML over HTTP.** Opening `index.html` straight from disk with a `file://` URL leaves every page empty, because the `fetch()` calls are blocked. Serve the folder over HTTP instead, as illustrated in [Local preview](#local-preview).
 
 ---
 
 ## Features
 
-- **No build step**: edit a file, refresh the browser, done — no generator, no `npm install`
-- **Content in YAML**: four files hold every word on the site; the HTML is pure layout
+- **No build step**: edit a file, refresh the browser, done. No generator or `npm install` needed
+- **Content in YAML**: four files hold every word on the site, and the HTML is pure layout
 - **Markdown bodies**: headings, lists, tables, code fences, quotes, footnotes, figures, and `$math$`
-- **Light / dark / system theme**: one palette in `site.yml`, applied across every page
+- **Light / Dark / System theme**: one palette in `site.yml` is applied across every page
 - **Automatic contents list**: post and project pages build their own TOC from the headings in the body
 - **Free-text search**: the blog and projects archives filter live across titles, summaries, and tags
 - **Publication cards**: coloured journal chips, auto-bolded author name, expandable abstract and BibTeX
@@ -71,10 +69,10 @@ Then visit <http://localhost:8000>.
 ## Quickstart
 
 1. Serve the folder and open <http://localhost:8000>.
-2. Open `site.yml` and replace the `owner:` block — name, role line, bio paragraphs.
+2. Open `site.yml` and replace the `owner:` block name, role line, bio paragraphs.
 3. Point the `links:` rows at your own profiles; blank a `url:` to hide that row.
-4. Add an entry to `posts.yml`, `projects.yml`, or `publications.yml`.
-5. Refresh. Keep the browser console open — that is where authoring mistakes are reported.
+4. Add respective entries to `posts.yml`, `projects.yml`, or `publications.yml`.
+5. Refresh. Keep the browser console open or directly [use VSCode](https://code.visualstudio.com/docs/debugtest/integrated-browser).
 
 ---
 
@@ -82,9 +80,9 @@ Then visit <http://localhost:8000>.
 
 ### Pages
 
-| File | What it is |
+| File | Description |
 |---|---|
-| `index.html` | About / home page — bio, socials, and the selected projects, publications and posts |
+| `index.html` | About page, including bio, socials, and the selected projects, publications and posts |
 | `blog.html` | Blog archive, grouped by year, with a search box |
 | `projects.html` | Projects archive, as a card grid with a search box |
 | `publications.html` | Publications list, with abstract / BibTeX / DOI controls |
@@ -93,19 +91,19 @@ Then visit <http://localhost:8000>.
 
 ### Shared components
 
-| File | What it is |
+| File | Description |
 |---|---|
 | `SiteNav.dc.html` | Nav bar: page links, scroll-spy underline, theme button |
 | `SiteFooter.dc.html` | Footer: owner name, credit line, repo link |
 
 > [!IMPORTANT]
-> **Do not rename the `.dc.html` files.** A `<dc-import name="SiteNav">` tag is resolved by fetching `./SiteNav.dc.html` — the filename *is* the component name, and both files must sit next to the HTML pages.
+> **Do not rename the `.dc.html` files.** A `<dc-import name="SiteNav">` tag is resolved by fetching `./SiteNav.dc.html` as the filename *is* the component name, and both files must sit next to the HTML pages.
 
 ### Shared code
 
 | File | Responsibility |
 |---|---|
-| `support.js` | The DC runtime — compiles `<x-dc>` markup to React. Generated; do not edit by hand |
+| `support.js` | The DC runtime that compiles `<x-dc>` markup to React. |
 | `site-theme.js` | The colour palette and the light/dark/system engine, exposed as `window.SiteTheme` |
 | `site-data.js` | YAML reader, markdown renderer, search helpers, and content validation, as `window.SiteData` |
 
@@ -115,15 +113,15 @@ Then visit <http://localhost:8000>.
 |---|---|
 | `site.yml` | Name, role, bio, social links, section blurbs, footer, colour palette |
 | `posts.yml` | Every blog post, newest first |
-| `projects.yml` | Every project |
+| `projects.yml` | Every project, newest first |
 | `publications.yml` | Every publication, newest first |
 
 ### Assets
 
 | Path | Holds |
 |---|---|
-| `assets/logo.svg`, `assets/favicon.svg` | Site marks |
-| `assets/cv.pdf`, `assets/cv-full.pdf` | The CVs linked from the about page |
+| `assets/logo.svg`, `assets/favicon.svg` | Website marks |
+| `assets/cv.pdf`, `assets/cv-full.pdf` | CVs linked from the about page |
 | `assets/posts/`, `assets/projects/` | Images referenced from the YAML bodies |
 
 `image:` paths are relative to this folder, e.g. `assets/posts/my-figure.png`. Leave the field empty and a dashed placeholder is drawn in its place.
@@ -142,9 +140,9 @@ Add an entry at the top of `posts.yml`:
   date: 2026-03-15
   selected: true          # true = also on the about page
   draft: false            # true = hidden everywhere, kept in the file
-  tags: [kinetics, simulation]
+  tags: [chemical kinetics]
   summary: One-sentence standfirst.
-  image: assets/posts/hero.png
+  image: assets/posts/pes.png
   link:
   doi:
   body: |
@@ -174,7 +172,8 @@ Every line under `body: |` must be indented by four spaces. Dates are `YYYY-MM-D
 
 ### Slugs and links
 
-Each entry in `posts.yml` and `projects.yml` needs a **unique `slug`**. That slug is the URL hash on the single-entry pages: `post.html#rare-event-kinetics`. Tag chips on a post link back to the archive as `blog.html#tag=<tag>`, which prefills the search box there.
+> [!IMPORTANT]
+> Each entry in `posts.yml` and `projects.yml` needs a **unique `slug`**. That slug is the URL hash on the single-entry pages: `post.html#rare-event-kinetics`. Tag chips on a post link back to the archive as `blog.html#tag=<tag>`, which prefills the search box there.
 
 > [!NOTE]
 > An unknown slug is not an error page. `post.html#nope` falls back to the newest post and `project.html#nope` to the first project, each with a line explaining what happened.
@@ -183,21 +182,21 @@ Each entry in `posts.yml` and `projects.yml` needs a **unique `slug`**. That slu
 
 `publications.yml` carries the full record: authors, journal, volume, pages, DOI, abstract, and BibTeX. Three details are worth knowing:
 
-- **Your surname is bolded automatically** wherever it appears in an author list. The match comes from `owner.surname` in `site.yml`.
-- **`journal_color`** sets the small chip beside the entry (`"#B23A48"`, or a bare `B23A48`). Leave it empty to use the accent colour; the label flips between black and white so it stays legible on whatever colour you pick.
-- **BibTeX is never generated.** The `BIB` button appears only once you paste an entry into that publication's `bibtex: |` field yourself.
+1. **Automatic surname bolding**: match comes from `owner.surname` in `site.yml`
+2. **Customizable journal coloring**: `journal_color` sets the small chip beside the entry
+3. **Manual BibTeX entries**: The `BIB` button appears once text is pasted in `bibtex: |` field
 
 The `ABS` and `BIB` buttons expand in place, and the `DOI` button copies the resolved DOI link to the clipboard while the title itself opens it.
 
 ### Search behaviour
 
-The blog and projects archives share one search box. It matches titles, summaries and tags — **not** body text — and ignores queries shorter than three characters, so a stray keystroke does not empty the page. Clicking a tag chip drops that tag into the box; the `×` clears it.
+The blog and projects archives share one search box. It matches titles, summaries and tags (**not** body text) and ignores queries shorter than three characters, so a stray keystroke does not empty the page. Clicking a tag chip drops that tag into the box; the `×` clears it.
 
 ---
 
 ## Configuration
 
-All of it lives in `site.yml`.
+Within `site.yml`.
 
 | Block | Controls |
 |---|---|
@@ -227,7 +226,7 @@ Each row in `links:` is one clickable line: `icon` is a Font Awesome class, `tit
 
 ### The bio paragraphs
 
-`bio`, `bio_2`, `bio_3`, and `bio_4` are rendered as inline markdown, so they can carry `[label](url)` links — that is how the CV links reach `assets/cv.pdf`. Any of them left empty is hidden rather than rendered as a blank paragraph. `name_light` is the trailing part of your name that the about page sets in a lighter weight.
+`bio`, `bio_2`, `bio_3`, and `bio_4` are rendered as inline markdown, so they can carry `[label](url)` links: that is how the CV links reach `assets/cv.pdf`. Any of them left empty is hidden rather than rendered as a blank paragraph. `name_light` is the trailing part of your name that the about page sets in a lighter weight.
 
 ---
 
@@ -243,7 +242,7 @@ python3 -m http.server 8000
 npx serve .
 ```
 
-Then visit <http://localhost:8000>.
+Then visit <http://localhost:8000>. Alternatively, [use VSCode](https://code.visualstudio.com/docs/debugtest/integrated-browser).
 
 > [!TIP]
 > Keep the browser console open while editing. Missing required fields and duplicate slugs are reported there by file and entry, e.g. `[posts.yml] duplicate slug "intro" — only the first entry is reachable at #intro.`
@@ -252,7 +251,7 @@ Then visit <http://localhost:8000>.
 
 ## Deployment
 
-Push the contents of this folder to the repository root — or to `/docs`, and point Pages at it. Nothing needs building first.
+The contents of this folder are the repository root, which Pages points at it. Nothing needs building.
 
 GitHub Pages serves extensionless URLs, so `/blog` resolves to `blog.html`. The same folder works unchanged on Netlify, Cloudflare Pages, or a plain nginx root.
 
@@ -262,9 +261,9 @@ GitHub Pages serves extensionless URLs, so `/blog` resolves to `blog.html`. The 
 
 | Symptom | Cause |
 |---|---|
-| Every page is empty | Opened over `file://` — serve the folder over HTTP instead |
+| Every page is empty | Opened over `file://`; serve the folder over HTTP instead |
 | One entry is missing fields | YAML indentation; the console names the file and the entry |
-| A `#slug` link lands on the wrong entry | Duplicate slug — only the first one is reachable |
+| A `#slug` link lands on the wrong entry | Duplicate slug; only the first one is reachable |
 | Nav or footer missing | A `.dc.html` file was renamed, or is not sitting next to the HTML pages |
 | Math shows as plain text | KaTeX did not load; check the network tab |
 
@@ -278,12 +277,12 @@ Nothing is installed or bundled. Four things load from CDNs at runtime:
 
 | Dependency | Loaded by | Used for |
 |---|---|---|
-| React + ReactDOM 18.3.1 | `support.js`, from unpkg | The runtime the pages compile into |
+| React & ReactDOM 18.3.1 | `support.js`, from unpkg | The runtime the pages compile into |
 | Babel Standalone 7.29.0 | `support.js`, from unpkg | Compiling each page's script in the browser |
 | Font Awesome 6.5.2 | each page's `<helmet>` | The social and interface icons |
 | KaTeX 0.16.9 | `post.html`, `project.html` | Math in post and project bodies |
 
-Everything else — the pages, the runtime, the palette, the content — is served from this folder.
+Everything else is served from this folder: pages, runtime, palette, and content.
 
 ---
 
