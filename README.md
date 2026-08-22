@@ -101,42 +101,50 @@ The six HTML pages stay at the repository root, because GitHub Pages serves `/bl
 
 ### Shared components
 
+The files in `src/components/`:
+
 | File | What it is |
 |---|---|
-| `src/components/SiteNav.dc.html` | Nav bar: page links, scroll-spy underline, theme button |
-| `src/components/SiteFooter.dc.html` | Footer: owner name, credit line, repo link |
+| `SiteNav.dc.html` | Nav bar: page links, scroll-spy underline, theme button |
+| `SiteFooter.dc.html` | Footer: owner name, credit line, repo link |
 
 > [!IMPORTANT]
 > **Do not rename the `.dc.html` files, and keep the remap in step with them.** `COMPONENT_DIR` is baked into the generated `support.js` as `.`, so a `<dc-import name="SiteNav">` tag always asks for `./SiteNav.dc.html`, so the filename *is* the component name. Because the components live in `src/components/` instead, every page declares a `window.__resources` map in its `<head>` that redirects those two URLs. That block must stay **above** the `support.js` tag. Move or rename a component without updating the map and the nav or footer renders as an empty placeholder.
 
 ### Shared code
 
+The files in `src/lib/`:
+
 | File | Responsibility |
 |---|---|
-| `src/lib/support.js` | The DC runtime; compiles `<x-dc>` markup to React. |
-| `src/lib/site-theme.js` | The colour palette and the light/dark/system engine, exposed as `window.SiteTheme` |
-| `src/lib/site-data.js` | YAML reader, markdown renderer, search helpers, and content validation, as `window.SiteData` |
+| `support.js` | The DC runtime; compiles `<x-dc>` markup to React. |
+| `site-theme.js` | The colour palette and theme engine, exposed as `window.SiteTheme` |
+| `site-data.js` | YAML reader, markdown renderer, search helpers, and content validation, as `window.SiteData` |
 
 > [!WARNING]
 > A vendored build artifact: its `dc-runtime` source is not part of this repository, so it cannot be rebuilt here. Do not edit; replace it wholesale with a newer build
 
 ### Content
 
+The files in `content/`:
+
 | File | Holds |
 |---|---|
-| `content/site.yml` | Name, role, bio, social links, section blurbs, footer, colour palette |
-| `content/posts.yml` | The running order of the blog, newest first |
-| `content/projects.yml` | The running order of the projects |
-| `content/posts/`, `content/projects/` | One file per post / project; this is where the writing goes |
-| `content/publications.yml` | Every publication, newest first |
+| `site.yml` | Name, role, bio, social links, section blurbs, footer, colour palette |
+| `posts.yml` | The running order of the blog, newest first |
+| `projects.yml` | The running order of the projects |
+| `posts/`, `projects/` | One file per post / project; this is where the writing goes |
+| `publications.yml` | Every publication, newest first |
 
 ### Assets
 
+The files in `assets/`:
+
 | Path | Holds |
 |---|---|
-| `assets/logo.svg`, `assets/favicon.svg` | Site marks |
-| `assets/cv.pdf`, `assets/cv-full.pdf` | The CVs linked from the about page |
-| `assets/posts/`, `assets/projects/` | Images referenced from the YAML bodies |
+| `logo.svg`, `favicon.svg` | Site marks |
+| `cv.pdf`, `cv-full.pdf` | The CVs linked from the about page |
+| `posts/`, `projects/` | Images referenced from the YAML bodies |
 
 `image:` paths are relative to the repository root, e.g. `assets/posts/my-figure.png`. Leave the field empty and a dashed placeholder is drawn in its place.
 
