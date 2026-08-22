@@ -1,4 +1,4 @@
-# alandella.github.io - Personal Academic Website
+# Personal Website
 
 ![HTML](https://img.shields.io/badge/HTML-static%20site-blue)
 ![Build](https://img.shields.io/badge/build-none-informational)
@@ -6,9 +6,7 @@
 ![Platform](https://img.shields.io/badge/platform-any%20modern%20browser-lightgrey)
 ![Hosting](https://img.shields.io/badge/hosting-GitHub%20Pages-important)
 
-A **static personal website** (about page, blog, projects and publications) where every piece of copy lives in YAML files under `content/`. There is no build step, no site generator, and no database: upload the folder to any static host and it runs.
-
-Live at <https://alandella.github.io/>
+A **static personal website** (about page, blog, projects and publications) where every piece of copy lives in YAML files under `content/`. There is no build step, no site generator, and no database: just upload the folder to any static host.
 
 ---
 
@@ -95,13 +93,16 @@ Then visit <http://localhost:8000>.
 The six HTML pages stay at the repository root, because GitHub Pages serves `/blog` from `blog.html`, which only works if the file is at the top level. Everything else is grouped into folders:
 
 ```
-├── index.html  blog.html  projects.html
-├── publications.html  post.html  project.html
-├── content/            every word on the site: two indexes, one file
-│                       per post and project, plus site.yml and publications.yml
-├── src/lib/           the three JavaScript files
-├── src/components/    the two shared .dc.html components
-└── assets/            logos, CVs, and body images
+├── blog.html
+├── index.html
+├── post.html
+├── project.html
+├── projects.html
+├── publications.html
+├── content/             one file per post/project, plus site and publications
+├── src/lib/             three JavaScript files
+├── src/components/      two shared .dc.html components
+└── assets/              logos, CVs, and content images
 ```
 
 ### Shared components
@@ -118,9 +119,12 @@ The six HTML pages stay at the repository root, because GitHub Pages serves `/bl
 
 | File | Responsibility |
 |---|---|
-| `src/lib/support.js` | The DC runtime; compiles `<x-dc>` markup to React. A vendored build artifact: its `dc-runtime` source is not part of this repository, so it cannot be rebuilt here. Do not edit; replace it wholesale with a newer build |
+| `src/lib/support.js` | The DC runtime; compiles `<x-dc>` markup to React. |
 | `src/lib/site-theme.js` | The colour palette and the light/dark/system engine, exposed as `window.SiteTheme` |
 | `src/lib/site-data.js` | YAML reader, markdown renderer, search helpers, and content validation, as `window.SiteData` |
+
+> [!WARNING]
+> A vendored build artifact: its `dc-runtime` source is not part of this repository, so it cannot be rebuilt here. Do not edit; replace it wholesale with a newer build
 
 ### Content
 
@@ -232,9 +236,9 @@ Each post and project needs a **unique `slug`**, set in its own file under `cont
 
 `content/publications.yml` carries the full record: authors, journal, volume, pages, DOI, abstract, and BibTeX. Three details are worth knowing:
 
-- **Your surname is bolded automatically** wherever it appears in an author list. The match comes from `owner.surname` in `content/site.yml`.
-- **`journal_color`** sets the small chip beside the entry (`"#B23A48"`, or a bare `B23A48`). Leave it empty to use the accent colour; the label flips between black and white so it stays legible on whatever colour you pick.
-- **BibTeX is never generated.** The `BIB` button appears only once you paste an entry into that publication's `bibtex: |` field yourself.
+1. **Automatic surname bolding**: matching comes from `owner.surname` in `site.yml`
+2. **Customizable journal coloring**: `journal_color` sets the small chip beside the entry
+3. **Manual BibTeX entries**: `BIB` button appears once text is pasted in `bibtex: |` field
 
 The `ABS` and `BIB` buttons expand in place, and the `DOI` button copies the resolved DOI link to the clipboard while the title itself opens it.
 
@@ -329,7 +333,7 @@ Nothing is installed or bundled. Four things load from CDNs at runtime:
 
 | Dependency | Loaded by | Used for |
 |---|---|---|
-| React + ReactDOM 18.3.1 | `src/lib/support.js`, from unpkg | The runtime the pages compile into |
+| React & ReactDOM 18.3.1 | `src/lib/support.js`, from unpkg | The runtime the pages compile into |
 | Babel Standalone 7.29.0 | `src/lib/support.js`, from unpkg | Compiling each page's script in the browser |
 | Font Awesome 6.5.2 | each page's `<helmet>` | The social and interface icons |
 | KaTeX 0.16.9 | `post.html`, `project.html` | Math in post and project bodies |
