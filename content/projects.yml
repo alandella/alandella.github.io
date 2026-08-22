@@ -1,0 +1,41 @@
+# =============================================================
+#  projects.yml — the running order of the projects.
+#  Each project lives in its own file under content/projects/;
+#  this file only lists them. The about page carousel shows the
+#  ones with selected: true; projects.html shows all of them.
+#
+#  Adding a project
+#    1. create content/projects/my-project.yml
+#    2. add a line here:   - file: projects/my-project.yml
+#
+#  Fields (they go in the project's own file, not here)
+#    slug      unique id  ->  project.html#slug
+#    title     project name
+#    summary   one line, shown on the card
+#    image     card image path; empty = dashed placeholder
+#    tags      [one, two]
+#    year      shown on the card and the project page
+#    status    e.g. ongoing, completed
+#    role      your role, e.g. lead developer
+#    link      external site — becomes a LINK badge
+#    repo      code repository — becomes a CODE badge
+#    paper     paper / preprint url — becomes a PAPER badge
+#    doi       10.xxxx/xxxxx — becomes a DOI badge
+#    selected  true = appears in the about page carousel
+#    body      the project page itself, markdown (use "body: |").
+#              Same syntax as posts: ## headings, lists, tables,
+#              code fences, $math$, ![](assets/x.png)
+#
+#  An entry may still be written inline here (- slug: ... with
+#  its fields indented two spaces); both forms work and can be
+#  mixed. Keys written next to `file:` override the ones in the
+#  included file.
+# =============================================================
+
+- file: projects/project-1.yml
+
+- file: projects/project-2.yml
+
+- file: projects/project-3.yml
+
+- file: projects/project-4.yml

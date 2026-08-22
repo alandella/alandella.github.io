@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The DC runtime resolves <dc-import name="X"> by fetching "./X.dc.html"
+		     (COMPONENT_DIR is baked into the generated support.js). The components
+		     live in src/components/, so remap those two URLs before the runtime
+		     loads. Without this the nav and footer render as empty placeholders. -->
+		<script>window.__resources = {
+			"./SiteNav.dc.html": "./src/components/SiteNav.dc.html",
+			"./SiteFooter.dc.html": "./src/components/SiteFooter.dc.html"
+		};</script>
+		<script src="./src/lib/support.js"></script>
+	</head>
+	<body>
+		<x-dc>
+			<helmet>
+				<title>projects — Andrea Giuseppe Landella</title>
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+					crossorigin="anonymous" referrerpolicy="no-referrer">
+				<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+				<script src="./src/lib/site-theme.js"></script>
+				<script src="./src/lib/site-data.js"></script>
+				<style>
+					html { scroll-behavior: smooth; }
+					body { margin: 0; background: #e8e9ee; color: #161A26; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; }
+					a { color: #2E5BD8; text-decoration: none; }
+					a:hover { text-decoration: underline; }
+					/* Hide the browser's built-in clear button on type="search";
+					   the page draws its own so two would otherwise appear. */
+					input[type="search"]::-webkit-search-cancel-button,
+					input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+					input[type="search"]::-ms-clear { display: none; width: 0; height: 0; }
+				</style>
+			</helmet>
+
+			<div
+				style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; line-height: 1.5; letter-spacing: -0.005em; min-height: 100vh; display: flex; flex-direction: column; transition: background-color .2s ease, color .2s ease; background: {{ t.bg }}; color: {{ t.text }}">
+
+				<dc-import name="SiteNav" t="{{ t }}" base="index.html" active="projects"
+					theme-icon="{{ themeIcon }}" theme-title="{{ themeTitle }}"
+					on-cycle="{{ cycleTheme }}" style="position: sticky; top: 0; z-index: 20"
+					hint-size="100%,66px"></dc-import>
+
+				<main style="flex: 1 0 auto; align-self: center; box-sizing: border-box; width: 100%; max-width: calc(930px + 48px); padding: 56px 24px 0">
+					<h1
+						style="margin: 0; font-size: 38px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.15">projects</h1>
+					<p
+						style="margin: 12px 0 24px; font-size: 17px; color: {{ t.muted }}">{{
+						blurb }}</p>
+
+					<div
+						style="display: flex; align-items: center; gap: 12px; margin: 0 0 8px; flex-wrap: wrap">
+						<div
+							style="position: relative; display: flex; align-items: center; flex: 1 1 260px; max-width: 420px">
+							<i class="fa-solid fa-magnifying-glass"
+								style="position: absolute; left: 12px; font-size: 12px; pointer-events: none; color: {{ t.muted }}"></i>
+							<input type="search" value="{{ query }}" onInput="{{ onSearch }}"
+								placeholder="Search titles, text, or tags…"
+								aria-label="Search projects"
+								style="width: 100%; box-sizing: border-box; padding: 8px 32px 8px 32px; border-radius: 999px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; outline: none; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}; color: {{ t.text }}">
+							<button type="button" onClick="{{ clearTags }}" aria-label="Clear search"
+								style="position: absolute; right: 10px; cursor: pointer; border: none; background: none; padding: 2px 4px; line-height: 1; font-size: 13px; color: {{ t.muted }}; display: {{ clearShow }}"
+								style-hover="color: {{ t.accent }}">&times;</button>
+						</div>
+						<span role="status" aria-live="polite"
+							style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; white-space: nowrap; color: {{ t.muted }}; display: {{ hintShow }}">type
+							at least 3 characters</span>
+					</div>
+					<p
+						style="margin: 0 0 28px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; color: {{ t.muted }}">{{
+						countNote }}</p>
+
+					<div
+						style="display: grid; grid-template-columns: repeat(auto-fill, minmax(266px, 1fr)); gap: 22px">
+						<sc-for list="{{ projects }}" as="proj" hint-placeholder-count="4">
+							<div
+								style="box-sizing: border-box; border-radius: 8px; overflow: hidden; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}; opacity: 0.6; transition: opacity .2s ease"
+								style-hover="opacity: 1">
+								<div
+									style="height: 120px; display: flex; align-items: center; justify-content: center; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; color: {{ t.muted }}; background: {{ t.codeBg }}; border-bottom: 1px dashed {{ t.dash }}">{{
+									proj.thumbNode }}<sc-if value="{{ proj.noImage }}"
+										hint-placeholder-val="{{ true }}"><span>project
+											image</span></sc-if></div>
+								<div style="padding: 16px 18px 20px">
+									<a href="{{ proj.href }}"
+										style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; color: {{ t.text }}; display: inline-block; margin-bottom: 8px"
+										style-hover="color: {{ t.accent }}; text-decoration: none">{{
+										proj.title }}</a>
+									<p style="margin: 0; font-size: 14px; color: {{ t.muted }}">{{
+										proj.summary }}</p>
+									<p
+										style="margin: 12px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; color: {{ t.muted }}; display: {{ proj.metaShow }}">{{
+										proj.meta }}</p>
+									<div
+										style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px">
+										<sc-for list="{{ proj.tags }}" as="tg"
+											hint-placeholder-count="2">
+											<button type="button" onClick="{{ tg.pick }}"
+												title="Search for this tag"
+												style="cursor: pointer; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.03em; padding: 2px 9px; border-radius: 999px; transition: all .15s ease; border: 1px solid {{ t.divider }}; background: none; color: {{ t.muted }}"
+												style-hover="border-color: {{ t.accent }}; color: {{ t.accent }}">{{
+												tg.label }}</button>
+										</sc-for>
+									</div>
+								</div>
+							</div>
+						</sc-for>
+					</div>
+
+					<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+						<p
+							style="margin: 24px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; color: {{ t.muted }}">{{
+							emptyNote }}</p>
+					</sc-if>
+
+					<div
+						style="margin: 40px 0 64px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px">
+						<a href="index.html#about" style="color: {{ t.muted }}">← back to about</a>
+					</div>
+				</main>
+
+				<dc-import name="SiteFooter" t="{{ t }}" hint-size="100%,80px"></dc-import>
+			</div>
+
+		</x-dc>
+		<script type="text/x-dc" data-dc-script>
+			const T = window.SiteTheme;
+
+			class Component extends DCLogic {
+				state = { setting: "system", systemDark: false, projects: null, err: "", query: "", cfg: null };
+
+				componentDidMount() {
+					// A #tag=foo hash prefills the search box.
+					// A malformed hash (e.g. "#tag=%") would otherwise throw out of mount.
+					let fromTag = "";
+					const m = String(location.hash || "").match(/^#tag=(.+)$/);
+					if (m) { try { fromTag = decodeURIComponent(m[1]); } catch (e) { fromTag = m[1]; } }
+
+					this.setState(Object.assign(T.start(this), { query: fromTag }));
+					this.grab();
+				}
+
+				componentWillUnmount() { T.stop(this); }
+
+				grab() {
+					const S = window.SiteData;
+					// site.yml (theme) and the content file do not depend on each other,
+					// so start both now instead of chaining the content behind ready().
+					// That removes one full round trip from the critical path.
+					const data = S.load("content/projects.yml");
+					S.ready()
+					.then(cfg => this.setState({ cfg: cfg || {} }))
+					.then(() => data)
+					.then(d => this.setState({ projects: S.validate("content/projects.yml", d, ["title", "slug"], true) }))
+					.catch(e => this.setState({ err: String(e && e.message || e) }));
+				}
+
+				componentDidUpdate() { T.sync(this.state); }
+
+				setQuery(q) {
+					this.setState({ query: q });
+				}
+
+				renderVals() {
+					const S = window.SiteData;
+					const t = T.PALETTES[T.resolve(this.state)];
+
+					const base = Object.assign({
+						year: new Date().getFullYear(),
+						blurb: ((this.state.cfg || {}).blurbs || {}).projects || "",
+						query: this.state.query,
+						onSearch: e => this.setQuery(e && e.target ? e.target.value : ""),
+						clearTags: () => this.setQuery(""),
+						clearShow: this.state.query ? "block" : "none",
+						hintShow: (function (n) { return n > 0 && n < 3 ? "inline" : "none"; })(String(this.state.query || "").trim().length),
+						projects: [], countNote: "", empty: false, emptyNote: ""
+					}, T.vals(this));
+
+					const all = this.state.projects;
+					if (this.state.err) return Object.assign(base, { empty: true, emptyNote: "Could not read projects.yml — " + this.state.err });
+					if (!all) return Object.assign(base, { countNote: "loading…" });
+
+					const live = all.filter(p => p && p.title);
+
+					// Free-text search across title, summary, status, role, year and tags.
+					// Bodies are excluded, and queries under 3 characters are ignored,
+					// so short strings do not match prose inside every project.
+					const raw = String(this.state.query || "").trim().toLowerCase();
+					const q = raw.length >= 3 ? raw : "";
+					const hay = p => [p.title, p.summary, p.status, p.role, p.year, S.tagsOf(p).join(" ")]
+						.filter(Boolean).map(String).join(" ").toLowerCase();
+					const shown = q ? live.filter(p => hay(p).indexOf(q) >= 0) : live;
+
+					return Object.assign(base, {
+						projects: shown.map(p => {
+							const meta = [p.year, p.status].filter(Boolean).map(String).join(" · ");
+							return {
+								title: p.title,
+								summary: p.summary || "",
+								href: "project.html#" + p.slug,
+								thumbNode: p.image ? React.createElement("img", { src: p.image, alt: p.title || "", style: { width: "100%", height: "100%", objectFit: "cover" } }) : null,
+								noImage: !p.image,
+								meta: meta,
+								metaShow: meta ? "block" : "none",
+								tags: S.tagsOf(p).map(x => ({ label: x, pick: () => this.setQuery(x) }))
+							};
+						}),
+						countNote: shown.length + (shown.length === 1 ? " project" : " projects")
+							+ (q ? ' matching "' + this.state.query.trim() + '"' : ""),
+						empty: shown.length === 0,
+						emptyNote: live.length ? "No projects match that search." : "No projects in projects.yml yet."
+					});
+				}
+			}
+
+		</script>
+	</body>
+</html>

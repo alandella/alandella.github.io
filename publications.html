@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The DC runtime resolves <dc-import name="X"> by fetching "./X.dc.html"
+		     (COMPONENT_DIR is baked into the generated support.js). The components
+		     live in src/components/, so remap those two URLs before the runtime
+		     loads. Without this the nav and footer render as empty placeholders. -->
+		<script>window.__resources = {
+			"./SiteNav.dc.html": "./src/components/SiteNav.dc.html",
+			"./SiteFooter.dc.html": "./src/components/SiteFooter.dc.html"
+		};</script>
+		<script src="./src/lib/support.js"></script>
+	</head>
+	<body>
+		<x-dc>
+			<helmet>
+				<title>publications — Andrea Giuseppe Landella</title>
+				<link rel="stylesheet"
+					href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+					crossorigin="anonymous" referrerpolicy="no-referrer">
+				<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+				<script src="./src/lib/site-theme.js"></script>
+				<script src="./src/lib/site-data.js"></script>
+				<style>
+					html { scroll-behavior: smooth; }
+					body { margin: 0; background: #e8e9ee; color: #161A26; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; }
+					a { color: #2E5BD8; text-decoration: none; }
+					a:hover { text-decoration: underline; }
+				</style>
+			</helmet>
+
+			<div
+				style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; line-height: 1.5; letter-spacing: -0.005em; min-height: 100vh; display: flex; flex-direction: column; transition: background-color .2s ease, color .2s ease; background: {{ t.bg }}; color: {{ t.text }}">
+
+				<dc-import name="SiteNav" t="{{ t }}" base="index.html"
+					active="publications" theme-icon="{{ themeIcon }}"
+					theme-title="{{ themeTitle }}" on-cycle="{{ cycleTheme }}"
+					style="position: sticky; top: 0; z-index: 20"
+					hint-size="100%,66px"></dc-import>
+
+				<main style="flex: 1 0 auto; align-self: center; box-sizing: border-box; width: 100%; max-width: calc(930px + 48px); padding: 56px 24px 0">
+					<h1
+						style="margin: 0; font-size: 38px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.15">publications</h1>
+					<p
+						style="margin: 12px 0 8px; font-size: 17px; color: {{ t.muted }}">{{
+						blurb }}</p>
+					<p
+						style="margin: 0 0 28px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; color: {{ t.muted }}">{{
+						countNote }}</p>
+
+					<div
+						style="display: flex; flex-direction: column; border-top: 1px solid {{ t.divider }}">
+						<sc-for list="{{ pubs }}" as="pub" hint-placeholder-count="3">
+							<div
+								style="display: flex; gap: 20px; padding: 22px 0; border-bottom: 1px solid {{ t.divider }}; opacity: 0.6; transition: opacity .2s ease"
+								style-hover="opacity: 1">
+								<div
+									style="width: 118px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 8px">
+									<span
+										style="font-size: 11px; font-weight: 700; border-radius: 4px; padding: 2px 7px; white-space: nowrap; color: {{ t.accent }}; border: 1px solid {{ t.accent }}">{{
+										pub.year }}</span>
+									<span
+										style="text-align: center; font-size: 12px; line-height: 1.35; font-weight: 600; color: {{ pub.chipFg }}; background: {{ pub.chipBg }}; padding: 3px 8px; border-radius: 4px">{{
+										pub.journalShort }}</span>
+								</div>
+								<div style="flex: 1; min-width: 0">
+									<p style="margin: 0; font-weight: 700; font-size: 17px; letter-spacing: -0.02em">
+										<a href="{{ pub.doiHref }}" target="{{ pub.titleTarget }}"
+											rel="{{ pub.titleRel }}"
+											style="color: inherit; cursor: {{ pub.titleCursor }}"
+											style-hover="color: {{ t.accent }}; text-decoration: none">{{
+											pub.title }}</a>
+									</p>
+									<p style="margin: 12px 0 0; font-size: 14.5px; color: {{ t.muted }}">{{
+										pub.authors }}</p>
+									<p
+										style="margin: 12px 0 16px; font-size: 14.5px; color: {{ t.muted }}">{{
+										pub.venue }}</p>
+									<div
+										style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+										<button type="button" onClick="{{ pub.toggleAbs }}"
+											style="display: inline-flex; cursor: pointer; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.04em; line-height: 1.45; box-sizing: border-box; padding: 5px 10px; min-width: 52px; border-radius: 4px; align-items: center; justify-content: center; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}; color: {{ t.text }}"
+											style-hover="border-color: {{ t.accent }}; color: {{ t.accent }}">ABS</button>
+										<button type="button" onClick="{{ pub.copyDoi }}"
+											title="Copy DOI to clipboard"
+											style="cursor: pointer; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.04em; line-height: 1.45; box-sizing: border-box; padding: 5px 10px; min-width: 52px; border-radius: 4px; align-items: center; justify-content: center; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}; color: {{ t.text }}; display: {{ pub.doiShow }}"
+											style-hover="border-color: {{ t.accent }}; color: {{ t.accent }}">DOI</button>
+										<sc-for list="{{ pub.links }}" as="lk" hint-placeholder-count="1">
+											<a href="{{ lk.href }}"
+												style="display: inline-flex; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.04em; line-height: 1.45; box-sizing: border-box; padding: 5px 10px; min-width: 52px; border-radius: 4px; align-items: center; justify-content: center; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}; color: {{ t.text }}"
+												style-hover="border-color: {{ t.accent }}; color: {{ t.accent }}; text-decoration: none">{{
+												lk.label }}</a>
+										</sc-for>
+										<button type="button" onClick="{{ pub.toggleBib }}"
+											style="display: {{ pub.bibBtnShow }}; cursor: pointer; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.04em; line-height: 1.45; box-sizing: border-box; padding: 5px 10px; min-width: 52px; border-radius: 4px; align-items: center; justify-content: center; border: 1px solid {{ t.divider }}; background: {{ t.cardBg }}; color: {{ t.text }}"
+											style-hover="border-color: {{ t.accent }}; color: {{ t.accent }}">BIB</button>
+										<span
+											style="font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: {{ t.accent }}; display: {{ pub.badgeShow }}">{{
+											pub.badge }}</span>
+									</div>
+									<div
+										style="margin-top: 14px; padding: 14px 16px; border-radius: 6px; font-size: 14.5px; line-height: 1.6; text-align: justify; color: {{ t.muted }}; border: 1px dashed {{ t.dash }}; background: {{ t.codeBg }}; display: {{ pub.absShow }}">{{
+										pub.abstract }}</div>
+									<pre
+										style="margin: 14px 0 0; padding: 14px 16px; border-radius: 6px; overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; line-height: 1.6; color: {{ t.muted }}; border: 1px dashed {{ t.dash }}; background: {{ t.codeBg }}; display: {{ pub.bibShow }}">{{ pub.bibtex }}</pre>
+								</div>
+							</div>
+						</sc-for>
+					</div>
+
+					<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+						<p
+							style="margin: 24px 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; color: {{ t.muted }}">{{
+							emptyNote }}</p>
+					</sc-if>
+
+					<div
+						style="margin: 40px 0 64px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px">
+						<a href="index.html#about" style="color: {{ t.muted }}">← back to about</a>
+					</div>
+				</main>
+
+				<dc-import name="SiteFooter" t="{{ t }}" hint-size="100%,80px"></dc-import>
+			</div>
+
+		</x-dc>
+		<script type="text/x-dc" data-dc-script>
+			const T = window.SiteTheme;
+
+			// journal_color in publications.yml overrides the chip background.
+			// Accepts "#abc", "#aabbcc" or a bare "aabbcc"; anything else (or an
+			// empty field) falls back to the theme accent.
+			function chipColour(v, fallback) {
+				const raw = String(v == null ? "" : v).trim();
+				if (!raw) return fallback;
+				const hex = raw.charAt(0) === "#" ? raw : "#" + raw;
+				return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(hex) ? hex : fallback;
+			}
+
+			// Picks black or white text so the label stays legible on any chip
+			// colour (per-channel relative luminance, WCAG formula).
+			function readableOn(hex) {
+				const h = String(hex).replace("#", "");
+				const full = h.length === 3 ? h.split("").map(c => c + c).join("") : h;
+				if (full.length !== 6) return "#ffffff";
+				const ch = i => {
+					const v = parseInt(full.substr(i, 2), 16) / 255;
+					return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+				};
+				const L = 0.2126 * ch(0) + 0.7152 * ch(2) + 0.0722 * ch(4);
+				return L > 0.45 ? "#161A26" : "#ffffff";
+			}
+
+			// Renders "Journal Name, vol, pages, year" with only the journal in
+			// italic. Returns React nodes so the <p> itself carries no italic.
+			function venueNodes(p) {
+				const rest = [p.volume, p.pages, p.year].filter(Boolean).map(String);
+				const journal = p.journal ? String(p.journal) : "";
+				const out = [];
+				if (journal) {
+					out.push(React.createElement("em", { key: "j" }, journal));
+					if (rest.length) out.push(", " + rest.join(", "));
+				} else if (rest.length) {
+					out.push(rest.join(", "));
+				}
+				return out.length ? out : "";
+			}
+
+			class Component extends DCLogic {
+				state = { setting: "system", systemDark: false, pubs: null, err: "", open: {}, cfg: null };
+
+				componentDidMount() {
+					this.setState(T.start(this));
+					this.grab();
+				}
+
+				componentWillUnmount() { T.stop(this); }
+
+				grab() {
+					const S = window.SiteData;
+					// site.yml (theme) and the content file do not depend on each other,
+					// so start both now instead of chaining the content behind ready().
+					// That removes one full round trip from the critical path.
+					const data = S.load("content/publications.yml");
+					S.ready()
+					.then(cfg => this.setState({ cfg: cfg || {} }))
+					.then(() => data)
+					.then(d => this.setState({ pubs: S.validate("content/publications.yml", d, ["title", "year"], false) }))
+					.catch(e => this.setState({ err: String(e && e.message || e) }));
+				}
+
+				toggle(k) {
+					this.setState(st => ({ open: Object.assign({}, st.open, { [k]: !st.open[k] }) }));
+				}
+
+				componentDidUpdate() { T.sync(this.state); }
+
+				renderVals() {
+					const S = window.SiteData;
+					const t = T.PALETTES[T.resolve(this.state)];
+
+					const base = Object.assign({
+						year: new Date().getFullYear(),
+						blurb: ((this.state.cfg || {}).blurbs || {}).publications || "",
+						pubs: [], countNote: "", empty: false, emptyNote: ""
+					}, T.vals(this));
+
+					const all = this.state.pubs;
+					if (this.state.err) return Object.assign(base, { empty: true, emptyNote: "Could not read publications.yml — " + this.state.err });
+					if (!all) return Object.assign(base, { countNote: "loading…" });
+
+					const list = all.filter(p => p && (p.title || p.journal));
+
+					return Object.assign(base, {
+						pubs: list.map((p, i) => {
+							const links = [];
+							const doiHref = p.doi ? (/^https?:/.test(String(p.doi)) ? String(p.doi) : "https://doi.org/" + p.doi) : "";
+							const bib = S.bibtex(p);
+							if (p.pdf) links.push({ label: "PDF", href: String(p.pdf) });
+							if (p.code) links.push({ label: "CODE", href: String(p.code) });
+							// Journal name italic; volume / pages / year stay upright.
+						const venue = venueNodes(p);
+							return {
+								year: p.year == null ? "" : String(p.year),
+								journalShort: p.journal_short || p.journal || "",
+								chipBg: chipColour(p.journal_color, t.accent),
+								chipFg: readableOn(chipColour(p.journal_color, t.accent)),
+								title: p.title || "",
+								authors: S.authorNodes(p.authors),
+								venue: venue,
+								links: links,
+								badge: p.badge || "",
+								badgeShow: p.badge ? "inline" : "none",
+								abstract: p.abstract || "No abstract in publications.yml yet.",
+								bibtex: bib,
+								doiHref: doiHref,
+								doiShow: doiHref ? "inline-flex" : "none",
+								// The title links out to doi.org; the DOI button only copies.
+								titleTarget: doiHref ? "_blank" : "",
+								titleRel: doiHref ? "noopener noreferrer" : "",
+								titleCursor: doiHref ? "pointer" : "default",
+								copyDoi: () => S.copyText(doiHref, "DOI copied to clipboard"),
+								bibBtnShow: bib ? "inline-flex" : "none",
+								absShow: this.state.open["a" + i] ? "block" : "none",
+								bibShow: bib && this.state.open["b" + i] ? "block" : "none",
+								toggleAbs: () => this.toggle("a" + i),
+								toggleBib: () => this.toggle("b" + i)
+							};
+						}),
+						countNote: list.length + (list.length === 1 ? " entry" : " entries"),
+						empty: list.length === 0,
+						emptyNote: "No publications in publications.yml yet."
+					});
+				}
+			}
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+# =============================================================
+#  One blog post, in its own file.
+#  Referenced from posts.yml as:   - file: posts/sample-blog1.yml
+#  Same fields as an inline entry; see the header of posts.yml.
+# =============================================================
+
+slug: sample-blog1
+title: sample blog1
+date: 2026-03-15
+selected: true
+draft: false
+tags: [category]
+summary: One-sentence standfirst summarising the post.
+image:
+link:
+doi:
+body: |
+  post body
+
+  ## A subheading
+
+  Second paragraph. Keep paragraphs short; al-folio posts read best at this measure.
+
+  ![Caption for the image.]()
+
+  > A pull quote, if the post needs one.
+
+  Closing paragraph.

@@ -1,0 +1,24 @@
+# =============================================================
+#  One blog post, in its own file.
+#  Referenced from posts.yml as:   - file: posts/sample-blog4.yml
+#  Same fields as an inline entry; see the header of posts.yml.
+# =============================================================
+
+slug: sample-blog4
+title: sample blog4
+date: 2025-06-18
+selected: false
+draft: false
+tags: [category]
+summary: One-sentence standfirst summarising the post.
+image:
+link:
+doi:
+body: |
+  post body
+
+  ## A subheading
+
+  Second paragraph.
+
+  Closing paragraph.

@@ -1,0 +1,107 @@
+# =============================================================
+#  site.yml — everything about *you* and the site's look.
+#  The other three YAML files hold content (posts, projects,
+#  publications); this one holds identity, links, and colours.
+#
+#  Sections
+#    owner     your name, role line, and the two about-page
+#              paragraphs. Used by the about page and the footer.
+#    repo      the link shown in the footer of every page
+#    links     the icon row on the about page. Leave a url blank
+#              and that icon disappears — no placeholder is shown.
+#    theme     colour overrides. Anything you omit falls back to
+#              the built-in palette in site-theme.js, so you can
+#              set just one colour (e.g. accent) if you want.
+# =============================================================
+
+owner:
+  name: Andrea Giuseppe Landella
+  name_light: Landella
+  role: R&D Engineer · Double MSc in Chemical & Sustainable Process Engineering
+  surname: Landella # bolded automatically in publication author lists
+  bio: >
+    I am a chemical engineer working between use-inspired research and
+    industrial practice to advance a low-carbon and sustainable chemical
+    industry, translating lab ideas into scaled-up technologies.
+  bio_2: >
+    I worked on R&D projects in industrial decarbonization, 
+    circular economy, and smart manufacturing. In practice, designing process 
+    technologies for CO₂ utilization, scaling up waste upcycling processes, and 
+    building machine learning tools for data-driven process monitoring and optimization.
+  bio_3: >
+    I graduated from a joint program between [Politecnico di Milano](https://www.polimi.it/)
+    and [Politecnico di Torino](https://www.polito.it/), where I was drawn to 
+    computational physics and its approaches to predict chemical
+    reactivity. My MSc thesis focused on the stochastic simulation of rare event
+    processes in gas-phase chemical kinetics.
+  bio_4: >
+    Check out my [short CV](assets/cv.pdf), or my [full CV](assets/cv-full.pdf)
+    for additional details on my education, professional experience, affiliations,
+    and skills. Feel free to reach out, I'm always happy to connect!
+
+  photo:
+  photo_note: real profile picture # leave blank to hide
+
+repo:
+  label: repo:alandella.github.io
+  url: https://github.com/alandella/alandella.github.io
+
+credit: Coded with the assistance of Claude Code
+
+# Whole row (icon + note) is one link. "note" is the visible label.
+# "note" blank shows just the icon. "url" blank hides the whole row.
+links:
+  - icon: fa-solid fa-envelope
+    title: Email
+    url: mailto:andrealandella@outlook.com
+    note: mail.outlook.com
+  - icon: fa-brands fa-linkedin
+    title: LinkedIn
+    url: https://www.linkedin.com/in/alandella/
+    note: in.alandella
+  - icon: fa-brands fa-github
+    title: GitHub
+    url: https://github.com/alandella
+    note: alandella
+  - icon: fa-brands fa-google-scholar
+    title: Google Scholar
+    url: https://scholar.google.com/citations?user=Gkje7KQAAAAJ&hl=en
+    note: google.scholar
+  - icon: fa-brands fa-orcid
+    title: ORCID
+    url: https://orcid.org/0009-0008-3752-4680
+    note: 0009-0008-3752-4680
+
+# Section blurbs on the archive pages.
+blurbs:
+  blog: An overview of my personal posts on topics of interest.
+  projects: An overview of my personal and collaborative projects.
+  publications: An overview of my published work. Check out my Google Scholar for the complete list.
+
+theme:
+  light:
+    bg: "#e8e9ee"
+    navBg: "rgba(232,233,238,0.5)"
+    text: "#161A26"
+    muted: "#6C7288"
+    accent: "#2E5BD8"
+    divider: "#D6DAE4"
+    dash: "#C3C8D6"
+    cardBg: "#FBFBFD"
+    codeBg: "#DFE3EC"
+    footerBg: "#161A26"
+    footerText: "#D6DAE4"
+    footerLink: "#FBFBFD"
+  dark:
+    bg: "#161A26"
+    navBg: "rgba(22,26,38,0.5)"
+    text: "#D6DAE4"
+    muted: "#8A90A6"
+    accent: "#6C8FF0"
+    divider: "#2C3242"
+    dash: "#3C4356"
+    cardBg: "#1E2331"
+    codeBg: "#232936"
+    footerBg: "#D6DAE4"
+    footerText: "#161A26"
+    footerLink: "#161A26"

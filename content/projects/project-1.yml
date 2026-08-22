@@ -1,0 +1,34 @@
+# =============================================================
+#  One project, in its own file.
+#  Referenced from projects.yml as:  - file: projects/project-1.yml
+#  Same fields as an inline entry; see the header of projects.yml.
+# =============================================================
+
+slug: project-1
+title: Project 1
+summary: What it does
+image:
+tags: [tag one, tag two]
+year: 20XX
+status: ongoing
+role:
+link:
+repo: https://github.com/username/repository
+paper:
+doi:
+selected: true
+body: |
+  ## Overview
+
+  What the project is and why it exists. Markdown works the same
+  way as in posts.yml — headings, lists, code fences, tables,
+  images and $math$.
+
+  ## Approach
+
+  - first thing
+  - second thing
+
+  ## Results
+
+  What came out of it.

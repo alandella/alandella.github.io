@@ -1,0 +1,47 @@
+# =============================================================
+#  posts.yml — the running order of the blog.
+#  Each post lives in its own file under content/posts/; this
+#  file only lists them, newest first. Reorder these lines and
+#  the archive, the about page and the post pages all follow.
+#
+#  Adding a post
+#    1. create content/posts/my-post.yml
+#    2. add a line here:   - file: posts/my-post.yml
+#
+#  Fields (they go in the post's own file, not here)
+#    slug        url id, must be unique  ->  post.html#slug
+#    title       post title
+#    date        YYYY-MM-DD (shown as "15 mar 2026")
+#    selected    true = also appears on the about page (newest 2)
+#    draft       true = hidden everywhere, kept on disk
+#    tags        [one, two]  — clickable filters on the archive
+#    summary     one line, used on cards and under the title
+#    image       hero image path, e.g. assets/hero.jpg
+#                leave empty for a dashed placeholder
+#    link        external link, shown as a badge
+#    doi         DOI, shown as a badge
+#    body        the post, markdown, after "body: |"
+#                indent every body line by two spaces
+#
+#  An entry may still be written inline here (- slug: ... with
+#  its fields indented two spaces); both forms work and can be
+#  mixed. Keys written next to `file:` override the ones in the
+#  included file, which is handy for a quick change:
+#
+#    - file: posts/my-post.yml
+#      draft: true        # hide it without opening the file
+#
+#  Body markdown: ## and ### headings (they build the contents
+#  list), **bold**, *italic*, `code`, [links](url), lists,
+#  > quotes, ```code fences```, | tables |, ![caption](path)
+#  images, footnotes[^1] with [^1]: definitions at the end,
+#  and $inline math$ or $$display math$$.
+# =============================================================
+
+- file: posts/sample-blog1.yml
+
+- file: posts/sample-blog2.yml
+
+- file: posts/sample-blog3.yml
+
+- file: posts/sample-blog4.yml
