@@ -83,7 +83,7 @@ Then visit <http://localhost:8000>.
 
 | File | What it is |
 |---|---|
-| `index.html` | About / home page: bio, socials, and the selected projects, publications and posts |
+| `index.html` | About / home page: bio, socials, selected projects, publications and posts |
 | `blog.html` | Blog archive, grouped by year, with a search box |
 | `projects.html` | Projects archive, as a card grid with a search box |
 | `publications.html` | Publications list, with abstract / BibTeX / DOI controls |
@@ -92,18 +92,12 @@ Then visit <http://localhost:8000>.
 
 The six HTML pages stay at the repository root, because GitHub Pages serves `/blog` from `blog.html`, which only works if the file is at the top level. Everything else is grouped into folders:
 
-```
-├── blog.html
-├── index.html
-├── post.html
-├── project.html
-├── projects.html
-├── publications.html
-├── content/             one file per post/project, plus site and publications
-├── src/lib/             three JavaScript files
-├── src/components/      two shared .dc.html components
-└── assets/              logos, CVs, and content images
-```
+| Folder | What it is |
+|---|---|
+| `content/` | YAML file for bio, socials, projects, publications and posts |
+| `src/lib/` | Shared code via JavaScript files |
+| `src/components/` | Nav bar and Footer .dc.html components |
+| `assets/` | Files for logos, CVs, and content images |
 
 ### Shared components
 
@@ -320,7 +314,7 @@ GitHub Pages serves extensionless URLs, so `/blog` resolves to `blog.html`. The 
 | Every page is empty | Opened over `file://`; serve the folder over HTTP instead |
 | One entry is missing fields | YAML indentation; the console names the file and the entry |
 | A `#slug` link lands on the wrong entry | Duplicate slug; only the first one is reachable |
-| Nav or footer missing | A `.dc.html` file was renamed or moved without updating the `window.__resources` map in each page's `<head>` |
+| Nav or footer missing | A `.dc.html` file was renamed, or is not sitting next to the HTML pages |
 | Math shows as plain text | KaTeX did not load; check the network tab |
 
 The YAML reader is a **subset** of the format, not a full parser. Use spaces (never tabs), keep a space after each colon, and indent block bodies consistently.
